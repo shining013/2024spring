@@ -29,7 +29,7 @@ public class MyController {
 		return "list";
 	}
 	
-	@RequestMapping("/view")
+	@RequestMapping("/view") // view?id=1
 	public String view(HttpServletRequest request, Model model) {
 		String sId = request.getParameter("id");
 		model.addAttribute("dto",dao.viewDao(sId));
