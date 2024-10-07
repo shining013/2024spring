@@ -19,7 +19,7 @@ public class MyController {
 	
 	@RequestMapping("/")
 	public @ResponseBody String root() {
-		return "hello";
+		return "redirect:list";
 	}
 	
 	@RequestMapping("/list")
@@ -34,5 +34,27 @@ public class MyController {
 		String sId = request.getParameter("id");
 		model.addAttribute("dto",dao.viewDao(sId));
 		return "view";
+	}
+	
+	@RequestMapping("/writeForm")
+	public String writer() {
+		return "writeForm";
+	}
+	
+	@RequestMapping("/write")
+	public String write(HttpServletRequest request) {
+		dao.writeDao(
+				request.getParameter("writer"),
+				request.getParameter("title"),
+				request.getParameter("content")
+				);
+		System.out.println("finish.");
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		dao.deleteDao(request.getParameter("id"));
+		return "redirect:list";
 	}
 }

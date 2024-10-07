@@ -42,4 +42,20 @@ public class SimpleDbsDao implements ISimpleDbsDao {
 		return dto;
 	}
 
+	@Override
+	public int writeDao(String writer, String title, String content) {
+		System.out.println("writeDao()");
+		String query = "insert into simple_dbs (writer,title,content) values (?,?,?) ";
+//		int dtoup = template.update(query,writer,title,content);
+		return template.update(query,writer,title,content);
+	}
+
+	@Override
+	public int deleteDao(String id) {
+		System.out.println("deleteDao()");
+		String query = "delete from simple_dbs where id = ?";
+//		int dtodel =  template.update(query,Integer.parseInt(id));
+		return template.update(query,Integer.parseInt(id));
+	}
+
 }
