@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.demo.dao.ISimpleBbsDao;
+import com.sample.demo.dao.SimpleBbsDao;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class MyController {
 	
 	@Autowired
-	ISimpleBbsDao dao;
+	SimpleBbsDao dao;
 	
 	@RequestMapping("/")
 	public String root() {
@@ -25,36 +26,36 @@ public class MyController {
 	@RequestMapping("/list")
 	public String listPage(Model model) {
 		model.addAttribute("lists",dao.listDao());
-//		model.addAttribute("count",dao.countDao());
+		model.addAttribute("count",dao.countDao());
 		return "list";
 	}
 	
-//	@RequestMapping("/view") // view?id=1
-//	public String view(HttpServletRequest request, Model model) {
-//		String sId = request.getParameter("id");
-//		model.addAttribute("dto",dao.viewDao(sId));
-//		return "view";
-//	}
-//	
-//	@RequestMapping("/writeForm")
-//	public String writer() {
-//		return "writeForm";
-//	}
-//	
-//	@RequestMapping("/write")
-//	public String write(HttpServletRequest request) {
-//		dao.writeDao(
-//				request.getParameter("writer"),
-//				request.getParameter("title"),
-//				request.getParameter("content")
-//				);
-//		System.out.println("finish.");
-//		return "redirect:list";
-//	}
-//	
-//	@RequestMapping("/delete")
-//	public String delete(HttpServletRequest request) {
-//		dao.deleteDao(request.getParameter("id"));
-//		return "redirect:list";
-//	}
+	@RequestMapping("/view") // view?id=1
+	public String view(HttpServletRequest request, Model model) {
+		String sId = request.getParameter("id");
+		model.addAttribute("dto",dao.viewDao(sId));
+		return "view";
+	}
+	
+	@RequestMapping("/writeForm")
+	public String writer() {
+		return "writeForm";
+	}
+	
+	@RequestMapping("/write")
+	public String write(HttpServletRequest request) {
+		dao.writeDao(
+				request.getParameter("writer"),
+				request.getParameter("title"),
+				request.getParameter("content")
+				);
+		System.out.println("finish.");
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		dao.delete(request.getParameter("id"));
+		return "redirect:list";
+	}
 }
