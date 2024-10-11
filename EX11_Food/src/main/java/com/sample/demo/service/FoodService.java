@@ -105,7 +105,7 @@ public class FoodService {
 				.updatedAt(food.getUpdatedAt())
 				.menus(menus.stream().map((menu)->
 					FoodDetailView.Menu.builder()
-					.foodId(menu.getId())
+					.foodId(menu.getFoodId())
 					.name(menu.getName())
 					.price(menu.getPrice())
 					.createdAt(menu.getCreatedAt())
